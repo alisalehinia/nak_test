@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { UserListPage } from "./pages/userList";
+import { CreateUser } from "./pages/createUser";
+import { EditUser } from "./pages/editUser";
+import Header from "./components/header";
+import { Fibonacci } from "./pages/fibonacci";
+import { Collatz } from "./pages/collatz";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/list-item" element={<UserListPage />} />
+        <Route path="/list-item/create-user" element={<CreateUser />} />
+        <Route path="/list-item/edit-user/:id" element={<EditUser />} />
+        <Route path="/Fibonacci" element={<Fibonacci />} />
+        <Route path="/Collatz_Conjecture" element={<Collatz />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
