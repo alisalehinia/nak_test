@@ -70,7 +70,7 @@ export const UserList: React.FC = () => {
           css={css`
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px; /* Ensure the table has a minimum width to enable scrolling */
+            min-width: 600px;
             th,
             td {
               padding: 16px 24px;
