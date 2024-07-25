@@ -44,7 +44,13 @@ const formContainer = css`
   margin: 20px;
 `;
 
-const formFieldsContainer = css`
+const formContent = css`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const sectionContainer = css`
   border: 1px solid var(--color-border-tertiary, #e6e6e6);
   box-shadow: 0px 4px 22px 0px #0000000a;
   border-radius: 24px;
@@ -75,11 +81,10 @@ const field = css`
   margin-bottom: 12px;
   label {
     margin-bottom: 5px;
-    font-weight: bold;
     &:after {
       content: "*";
       color: red;
-      margin-left: 2px;
+      margin-right: 2px;
     }
   }
   input,
@@ -125,12 +130,7 @@ const divider = css`
 const buttonContainer = css`
   display: flex;
   justify-content: flex-end;
-  border: 1px solid var(--color-border-tertiary, #e6e6e6);
-  box-shadow: 0px 4px 22px 0px #0000000a;
-  border-radius: 24px;
-  padding: 20px;
-  background-color: #fff;
-  margin-top: 20px;
+  padding-top: 20px;
 `;
 
 const submitButton = css`
@@ -192,42 +192,42 @@ export const UserForm: React.FC<UserFormProps> = ({ user }) => {
 
   return (
     <div css={formContainer}>
-      <div css={formFieldsContainer}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} css={formContent}>
+        <div css={sectionContainer}>
           <div css={fieldRow}>
             <div css={field}>
-              <label>Name</label>
-              <input {...register("name")} />
+              <label htmlFor="name">Name</label>
+              <input id="name" {...register("name")} />
               {errors.name && (
                 <span css={errorMessage}>{errors.name.message}</span>
               )}
             </div>
             <div css={field}>
-              <label>User Name</label>
-              <input {...register("userName")} />
+              <label htmlFor="userName">User Name</label>
+              <input id="userName" {...register("userName")} />
               {errors.userName && (
                 <span css={errorMessage}>{errors.userName.message}</span>
               )}
             </div>
             <div css={field}>
-              <label>Email</label>
-              <input {...register("email")} />
+              <label htmlFor="email">Email</label>
+              <input id="email" {...register("email")} />
               {errors.email && (
                 <span css={errorMessage}>{errors.email.message}</span>
               )}
             </div>
           </div>
           <div css={field}>
-            <label>Phone</label>
-            <input {...register("phone")} />
+            <label htmlFor="phone">Phone</label>
+            <input id="phone" {...register("phone")} />
             {errors.phone && (
               <span css={errorMessage}>{errors.phone.message}</span>
             )}
           </div>
           <div css={divider}></div>
           <div css={statusField}>
-            <label>Status</label>
-            <select {...register("status")}>
+            <label htmlFor="status">Status</label>
+            <select id="status" {...register("status")}>
               <option value="">Select status</option>
               <option value="active">Active</option>
               <option value="not_active">Not Active</option>
@@ -236,13 +236,15 @@ export const UserForm: React.FC<UserFormProps> = ({ user }) => {
               <span css={errorMessage}>{errors.status.message}</span>
             )}
           </div>
+        </div>
+        <div css={sectionContainer}>
           <div css={buttonContainer}>
             <button type="submit" disabled={!isValid} css={submitButton}>
               Submit
             </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
